@@ -103,7 +103,14 @@ object Anagrams {
    *  Note that the order of the occurrence list subsets does not matter -- the subsets
    *  in the example above could have been displayed in some other order.
    */
-  def combinations(occurrences: Occurrences): List[Occurrences] = ???
+  def combinations(occurrences: Occurrences): List[Occurrences] = {
+    (List() :: (for {
+      (char, num) <- occurrences
+      other <- combinations(subtract(occurrences, List((char, num))))
+      i <- 1 to num
+    } yield (if (i > 0) (char, i) :: other else other) sortBy (_._1))).distinct
+
+  }
 
   /** Subtracts occurrence list `y` from occurrence list `x`.
    *
@@ -166,4 +173,6 @@ object Anagrams {
    *  Note: There is only one anagram of an empty sentence.
    */
   def sentenceAnagrams(sentence: Sentence): List[Sentence] = ???
+
+
 }
