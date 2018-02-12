@@ -178,9 +178,9 @@ object Anagrams {
         List(Nil)
       else
         for {
-          combination: Occurrences <- combinations(occurrences)
-          word: Word <- dictionaryByOccurrences(combination)
-          sentence: Sentence <- sentenceAnagrams(subtract(occurrences, combination))
+          combination <- combinations(occurrences)
+          word <- dictionaryByOccurrences(combination)
+          sentence <- sentenceAnagrams(subtract(occurrences, combination))
         } yield word :: sentence
     }
     sentenceAnagrams(sentenceOccurrences(sentence))
